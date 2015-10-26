@@ -5,7 +5,8 @@ var angular = require('angular');
 var app = angular.module('foobar', 
     [ 
         require('./common/common.js').name,
-        require('./modules/modules.js').name
+        require('./modules/modules.js').name,
+        'templates-main'
     ]);
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -16,12 +17,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('foo', {
                 url: '/foo',
-                templateUrl: "js/modules/foo/view.html",
+                templateUrl: "app/js/modules/foo/view.html",
                 controller: require('./modules/foo/foo.js'),
             })
             .state('bar', {
                 url: '/bar',
-                templateUrl: "js/modules/bar/view.html",
+                templateUrl: "app/js/modules/bar/view.html",
                 controller: require('./modules/bar/bar.js'),
             });
         }]
