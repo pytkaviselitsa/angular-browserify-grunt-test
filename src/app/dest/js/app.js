@@ -340,31 +340,31 @@ maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:"
 var angular = require('angular');
 
 var app = angular.module('foobar', 
-	[ 
-		require('./common/common.js').name,
-		require('./modules/modules.js').name
-	]);
+    [ 
+        require('./common/common.js').name,
+        require('./modules/modules.js').name
+    ]);
 
-app.config([ '$stateProvider', '$urlRouterProvider',
+app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
-      	$urlRouterProvider.otherwise('/foo');
+        $urlRouterProvider.otherwise('/foo');
 
-		$stateProvider
-			.state('foo', {
-				url: '/foo',
-				templateUrl: "js/modules/foo/view.html",
-				controller: require('./modules/foo/foo.js'),
-			})
-			.state('bar', {
-				url: '/bar',
-				templateUrl: "js/modules/bar/view.html",
-				controller: require('./modules/bar/bar.js'),
-			})
-    }
-  ])
+        $stateProvider
+            .state('foo', {
+                url: '/foo',
+                templateUrl: "js/modules/foo/view.html",
+                controller: require('./modules/foo/foo.js'),
+            })
+            .state('bar', {
+                url: '/bar',
+                templateUrl: "js/modules/bar/view.html",
+                controller: require('./modules/bar/bar.js'),
+            });
+        }]
+        );
 
-app.controller('IndexCtrl', require('./index_controller.js'))
+app.controller('IndexCtrl', require('./index_controller.js'));
 // app.controller('fooCtrl', ['$scope', require('./index_controller.js')])
 // app.factory('mainService', ['$scope', '$q', require('./app_service.js')])
 },{"./common/common.js":5,"./index_controller.js":11,"./modules/bar/bar.js":12,"./modules/foo/foo.js":14,"./modules/modules.js":17,"angular":3}],5:[function(require,module,exports){
@@ -384,26 +384,26 @@ module.exports = angular.module('common',
 },{"./directives":6,"./filters":7,"./services":9,"angular-bootstrap":1,"angular-ui-router":2}],6:[function(require,module,exports){
 'use strict';
 
-module.exports = angular.module('common.directives', [])
+module.exports = angular.module('common.directives', []);
     // .directive('directiveName', require('./directiveName.js'));
 },{}],7:[function(require,module,exports){
 'use strict';
 
-module.exports = angular.module('common.filters', [])
+module.exports = angular.module('common.filters', []);
 },{}],8:[function(require,module,exports){
 'use strict';
 
 var deferFactory = function($q) {
-	var param="123"
+	var param="123";
 
 	return {
 		getParam: getParam
-	}
+	};
 
 	function getParam(){
-		var defer = $q.defer()
-		defer.resolve(param)
-		return defer.promise
+		var defer = $q.defer();
+		defer.resolve(param);
+		return defer.promise;
 	}
 };
 
@@ -419,20 +419,20 @@ module.exports = angular.module('common.services', [])
 'use strict';
 
 var moduleFactory = function($q) {
-	var param="123"
+	var param="123";
 
 	this.$get = function(){
-		$factory_param = {
+		var $factory_param = {
 			param1:123,
 			param2:456
-		}
+		};
 
 		$factory_param.get_sum = function get_sum(){
-			return $factory_param.param1+$factory_param.param2
-		}
+			return $factory_param.param1+$factory_param.param2;
+		};
 
-		return $factory_param
-	}
+		return $factory_param;
+	};
 };
 
 moduleFactory.$inject = ['$q'];
@@ -446,8 +446,8 @@ function IndexCtrl($scope, deferFactory) {
     $scope.test_text = "Testing...INDEX";
     deferFactory.getParam().then(
     	function(result){
-    		console.log("PARAM", result)
-    	})
+    		console.log("PARAM", result);
+    	});
     console.log('Up and running!');
 
 }
@@ -456,15 +456,21 @@ function IndexCtrl($scope, deferFactory) {
 IndexCtrl.$inject = ['$scope', 'deferFactory'];
 module.exports = IndexCtrl;
 },{}],12:[function(require,module,exports){
-module.exports = function($scope, $state, fooService) {
+'use strict';
+
+function BarCtrl($scope, $state, fooService) {
   $scope.bar = "Testing...BAR";
 
   $scope.RunAction = function(){
-  		 console.log("RunAction foo!!!!!!");
-  		$state.go("foo")
-  }
+  		console.log("RunAction foo!!!!!!");
+  		$state.go("foo");
+  };
+
   console.log("---BARCtrl run.  fooService.getParam=", fooService.getParam(), "---");
-};
+}
+
+BarCtrl.$inject = ['$scope', '$state', 'fooService'];
+module.exports = BarCtrl;
 },{}],13:[function(require,module,exports){
 'use strict';
 // Home View
@@ -477,16 +483,16 @@ function FooCtrl($scope, $state, deferFactory, fooService) {
   $scope.foo = "Testing...FOO!!!!!!";
 
   $scope.RunAction = function(){
-  		$state.go("bar")
-  }
+  		$state.go("bar");
+  };
 
   deferFactory.getParam().then(
     	function(result){
-    		console.log("deferFactory.getParam result!!!", result)
-    	})
+    		console.log("deferFactory.getParam result!!!", result);
+    	});
 
   console.log("FooCtrl run.  fooService.getParam=", fooService.getParam());
-};
+}
 
 FooCtrl.$inject = ['$scope', '$state', 'deferFactory', 'fooService'];
 module.exports = FooCtrl;
@@ -494,14 +500,14 @@ module.exports = FooCtrl;
 'use strict';
 
 var fooService = function() {
-	var param="123"
+	var param="123";
 
 	return {
 		getParam: getParam
-	}
+	};
 
 	function getParam(){
-		return "foo"+param
+		return "foo"+param;
 	}
 };
 
@@ -511,8 +517,8 @@ module.exports = fooService;
 'use strict';
 // Home View
 module.exports = angular.module('modules.foo', [])
-    .controller('FooCtrl', require('./foo.js'))
 	.factory('fooService', require('./fooService.js'))
+    .controller('FooCtrl', require('./foo.js'));
 },{"./foo.js":14,"./fooService.js":15}],17:[function(require,module,exports){
 'use strict';
 

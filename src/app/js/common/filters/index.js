@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = angular.module('common.filters', [])
+module.exports = angular.module('common.filters', []);

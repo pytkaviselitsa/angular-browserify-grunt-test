@@ -25,26 +25,31 @@ module.exports = function (grunt) {
             './src/app/js/common/*/**.js'
             ],
         options: {
-          // options here to override JSHint defaults
-          globals: {
-            console: true,
-            module: true
+          jshintrc: ".jshintrc"
+        }
+      },
+      uglify: {
+        my_target: {
+          files: {
+            './src/app/dest/js/app.min.js': ['./src/app/dest/js/app.js']
           }
         }
       },
       watch: {
         js: {
           files: ['<%= jshint.files %>'],
-          tasks: ['browserify:app']
+          tasks: ['jshint', 'browserify:app', 'uglify']
         }
       }      
   });
 
+
   // Load the npm installed tasks
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
-  grunt.registerTask('default', ["browserify:app"]);
+  grunt.registerTask('default', ["jshint", "browserify:app", "uglify", "watch"]);
 };

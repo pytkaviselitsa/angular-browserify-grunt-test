@@ -6,8 +6,8 @@ function IndexCtrl($scope, deferFactory) {
     $scope.test_text = "Testing...INDEX";
     deferFactory.getParam().then(
     	function(result){
-    		console.log("PARAM", result)
-    	})
+    		console.log("PARAM", result);
+    	});
     console.log('Up and running!');
 
 }

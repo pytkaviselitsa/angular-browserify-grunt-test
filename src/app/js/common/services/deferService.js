@@ -1,16 +1,16 @@
 'use strict';
 
 var deferFactory = function($q) {
-	var param="123"
+	var param="123";
 
 	return {
 		getParam: getParam
-	}
+	};
 
 	function getParam(){
-		var defer = $q.defer()
-		defer.resolve(param)
-		return defer.promise
+		var defer = $q.defer();
+		defer.resolve(param);
+		return defer.promise;
 	}
 };
 
