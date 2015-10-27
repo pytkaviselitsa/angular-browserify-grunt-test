@@ -57,6 +57,17 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            dev: {
+                files: [
+                    {
+                        src: ['./src/app/dest/js/app.js' ],
+                        dest: 'dev',
+                        expand: true,
+                        filter: 'isFile',
+                        flatten: true
+                    }
+                ]
+            },
         },
         watch: {
             js: {
@@ -84,5 +95,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ["jshint", "html2js", "browserify", "uglify", "copy", "watch"]);
+    grunt.registerTask('default', ["jshint", "html2js", "browserify", "uglify", "copy:build", "watch"]);
+    grunt.registerTask('dev', ["jshint", "html2js", "browserify", "copy:dev"]);
 };

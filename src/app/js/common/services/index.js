@@ -2,4 +2,5 @@
 
 module.exports = angular.module('common.services', [])
     .factory('deferFactory', require('./deferService.js'))
-    .factory('moduleFactory', require('./moduleFactory.js'));
+    .provider('helloWorld', require('./moduleProvider.js'))
+    .factory('helloWorldFactory', require('./moduleProvider.js'));

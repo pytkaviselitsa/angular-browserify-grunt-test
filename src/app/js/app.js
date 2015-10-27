@@ -25,9 +25,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: "app/js/modules/bar/view.html",
                 controller: require('./modules/bar/bar.js'),
             });
+
         }]
         );
 
 app.controller('IndexCtrl', require('./index_controller.js'));
-// app.controller('fooCtrl', ['$scope', require('./index_controller.js')])
-// app.factory('mainService', ['$scope', '$q', require('./app_service.js')])
